@@ -39,19 +39,17 @@ public Action getScore(int client, int args)
 
 public Action getPlayerID(int client, int args)
 {
-    int noOfUsers = GetClientCount(true);
-
-    for (int i = 1; i <= noOfUsers; i++)
+    for (int i = 1; i <= 20; i++)
     {
-        char nickname[64];
+        if (IsClientInGame(i)) {
+            char nickname[64];
 
-        GetClientName(i, nickname, sizeof(nickname));
-        int playerTeam = GetClientTeam(i);
-        
-        if (playerTeam == 2) {PrintToChatAll("%s - Terrorists", nickname);}
-        if (playerTeam == 3) {PrintToChatAll("%s - Counter-Terrorists", nickname);}
-
+            GetClientName(i, nickname, sizeof(nickname));
+            int playerTeam = GetClientTeam(i);
+            
+            if (playerTeam == 2) {PrintToServer("Terrorists %s", nickname);}
+            if (playerTeam == 3) {PrintToServer("Counter-Terrorists %s", nickname);}
+        }
     }
-
     return Plugin_Handled;
 }
